@@ -10,7 +10,7 @@ Bowling.prototype = {
   throw: function(pins) {
     if(this.gameOver == true) { return }
 
-    if(this.scores[this._frame][0] === false) {
+    if(this.isFirstThrow()) {
       this.scores[this._frame][0] = pins;
       if(pins == 10) {
         this.scores[this._frame][1] = 0;
@@ -89,5 +89,9 @@ Bowling.prototype = {
 
   _isStandard: function(frame) {
     if(this.standardScore(frame) < 10) { return true }
+  },
+
+  isFirstThrow: function() {
+    if(this.scores[this._frame][0] === false) { return true }
   },
 };
