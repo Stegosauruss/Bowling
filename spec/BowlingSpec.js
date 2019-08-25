@@ -30,6 +30,7 @@ describe('Bowling:', function(){
       bowling.throw(3)
       bowling.throw(7)
       bowling.throw(2)
+      console.log(bowling.getCurrentFrame())
       expect(bowling.totalScore()).toEqual(12)
     });
 
@@ -80,4 +81,37 @@ describe('Bowling:', function(){
       expect(bowling.frameDisplay(1)).toEqual('X')
     });
   });
+
+  describe('#gameOver', function() {
+    it('after 20 throws', function() {
+      var i;
+      for(i = 1; i <= 20; i++) {
+        bowling.throw(0)
+      }
+      expect(bowling.getCurrentFrame()).toEqual(10)
+      expect(bowling.totalScore()).toEqual(0)
+      expect(bowling.gameOver).toEqual(true)
+    })
+
+    it('after 12 strikes', function() {
+      var i;
+      for(i = 1; i <= 12; i++) {        
+        bowling.throw(10)
+      }
+      expect(bowling.getCurrentFrame()).toEqual(12)
+      expect(bowling.totalScore()).toEqual(300)
+      expect(bowling.gameOver).toEqual(true)
+    })
+
+    it('after 10 spares', function() {
+      var i;
+      for(i = 1; i <= 21; i++) {        
+        bowling.throw(5)
+        bowling.throw(5)
+      }
+      expect(bowling.getCurrentFrame()).toEqual(11)
+      expect(bowling.totalScore()).toEqual(150)
+      expect(bowling.gameOver).toEqual(true)
+    })
+  })
 });
