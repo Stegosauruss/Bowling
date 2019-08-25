@@ -6,7 +6,7 @@ function Bowling(){
 };
 
 Bowling.prototype = {
-  getCurrentScore: function() {
+  totalScore: function() {
     var score;
     score = 0
     var i;
@@ -36,6 +36,8 @@ Bowling.prototype = {
   frameDisplay: function(frame) {
     if(this.frameScore(frame) == 10) {
       return '/'
+    } else {
+      return this.frameScore(frame);
     }
   }
 };
