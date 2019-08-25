@@ -32,6 +32,13 @@ describe('Bowling:', function(){
       bowling.throw(2)
       expect(bowling.totalScore()).toEqual(12)
     });
+
+    it('after a standard strike', function() {
+      bowling.throw(10);
+      bowling.throw(2);
+      bowling.throw(3);
+      expect(bowling.totalScore()).toEqual(20)
+    })
   });
 
   describe('#getCurrentFrame', function() {
@@ -53,6 +60,11 @@ describe('Bowling:', function(){
       bowling.throw(5)
       bowling.throw(5)
       expect(bowling.frameDisplay(1)).toEqual('/')
+    });
+
+    it('after a strike', function(){
+      bowling.throw(10)
+      expect(bowling.frameDisplay(1)).toEqual('X')
     });
   });
 });
