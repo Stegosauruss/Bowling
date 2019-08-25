@@ -12,18 +12,25 @@ describe('Bowling:', function(){
       expect(bowling.totalScore()).toEqual(0)
     });
 
-    it('after a frame the total score is increased', function(){
+    it('after one frame', function(){
       bowling.throw(3)
       bowling.throw(4)
       expect(bowling.totalScore()).toEqual(7)
     });
 
-    it('after two frames the score has increased', function(){
+    it('after two frames', function(){
       bowling.throw(3)
       bowling.throw(4)
       bowling.throw(2)
       bowling.throw(7)
       expect(bowling.totalScore()).toEqual(16)
+    });
+
+    it('after a spare', function(){
+      bowling.throw(3)
+      bowling.throw(7)
+      bowling.throw(2)
+      expect(bowling.totalScore()).toEqual(12)
     });
   });
 
