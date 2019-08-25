@@ -17,6 +17,14 @@ describe('Bowling:', function(){
     expect(bowling.getCurrentScore()).toEqual(7)
   });
 
+  it('after two frames the score has increased', function(){
+    bowling.throw(3)
+    bowling.throw(4)
+    bowling.throw(2)
+    bowling.throw(7)
+    expect(bowling.getCurrentScore()).toEqual(16)
+  });
+
   it('after a frame the frame is increased', function(){
     bowling.throw(3)
     bowling.throw(4)
