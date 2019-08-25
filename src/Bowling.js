@@ -2,7 +2,7 @@
 
 function Bowling(){
   this._frame = 1;
-  this.scores = [[],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null]];
+  this.scores = [[],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null],[null,null], [null,null]];
 };
 
 Bowling.prototype = {
@@ -21,9 +21,9 @@ Bowling.prototype = {
   },
 
   frameScore: function(frame) {
-    if(this.scores[frame][0] == 10) {
+    if(this._isStrike(frame)) {
       return this.strikeScore(frame);
-    } else if(this.standardScore(frame) == 10) {
+    } else if(this._isSpare(frame)) {
       return this.spareScore(frame);
     } else {
       return this.standardScore(frame);
@@ -39,7 +39,18 @@ Bowling.prototype = {
   },
 
   strikeScore: function(frame) {
+    if(this._isStrike(frame + 1)) {
+      return 20 + this.scores[frame + 2][0]
+    }
     return 10 + this.standardScore(frame + 1)
+  },
+
+  _isStrike: function(frame) {
+    if(this.scores[frame][0] == 10) { return true }
+  },
+
+  _isSpare: function(frame) {
+    if(this.standardScore(frame) == 10) { return true }
   },
 
   throw: function(pins) {
@@ -56,12 +67,12 @@ Bowling.prototype = {
   },
 
   frameDisplay: function(frame) {
-    if(this.scores[frame][0] == 10) {
+    if(this._isStrike(frame)) {
       return 'X'
-    }else if(this.standardScore(frame) == 10) {
+    }else if(this._isSpare(frame)) {
       return '/'
     } else {
       return this.standardScore(frame);
     }
-  }
+  },
 };

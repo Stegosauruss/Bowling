@@ -39,12 +39,25 @@ describe('Bowling:', function(){
       bowling.throw(3);
       expect(bowling.totalScore()).toEqual(20)
     })
+
+    it('after a double strike', function() {
+      bowling.throw(10);
+      bowling.throw(10);
+      bowling.throw(2);
+      bowling.throw(3);
+      expect(bowling.totalScore()).toEqual(42)
+    })
   });
 
   describe('#getCurrentFrame', function() {
     it('after a frame the frame is increased', function(){
       bowling.throw(3)
       bowling.throw(4)
+      expect(bowling.getCurrentFrame()).toEqual(2)
+    });
+
+    it('after a strike the frame is increased', function(){
+      bowling.throw(10)
       expect(bowling.getCurrentFrame()).toEqual(2)
     });
   });
