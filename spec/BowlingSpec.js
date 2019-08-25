@@ -30,4 +30,10 @@ describe('Bowling:', function(){
     bowling.throw(4)
     expect(bowling.getCurrentFrame()).toEqual(2)
   });
+
+  it('after a spare / is shown', function(){
+    bowling.throw(5)
+    bowling.throw(5)
+    expect(bowling.frameDisplay(1)).toEqual('/')
+  });
 });

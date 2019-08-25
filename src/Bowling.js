@@ -11,7 +11,7 @@ Bowling.prototype = {
     score = 0
     var i;
     for(i = 1; i < this.getCurrentFrame(); i ++) {
-      score += this.FrameScore(i)
+      score += this.frameScore(i)
     };
     return score;
   },
@@ -20,7 +20,7 @@ Bowling.prototype = {
     return this._frame;
   },
 
-  FrameScore: function(frame) {
+  frameScore: function(frame) {
     return this._scores[frame - 1].reduce((a,b) => a + b, 0)
   },
 
@@ -32,4 +32,10 @@ Bowling.prototype = {
       this._frame++
     };
   },
+
+  frameDisplay: function(frame) {
+    if(this.frameScore(frame) == 10) {
+      return '/'
+    }
+  }
 };
