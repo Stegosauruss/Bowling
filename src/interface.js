@@ -1,6 +1,10 @@
 $( document ).ready(function() {
   var bowling;
+  var bowling2;
   bowling = new Bowling()
+  bowling2 = new Bowling()
+
+  // game1
 
   $("#submit").click(function() {
     var score = parseInt($("#throw").val());
@@ -11,41 +15,63 @@ $( document ).ready(function() {
     }
     if(bowling.gameOver == true) {
       addRow(frame)
-      gameOverEvent()
+      gameOverEvent(bowling)
     }
   })
 
   var addRow = function(frame){
-    frameEvents(frame)
+    frameEvents(bowling, frame)
     $("#bowling-frames").append("<tr><td>" + frame + "</td><td>" + bowling.scores[frame][0] +  "</td><td>" + bowling.scores[frame][1] + "</td><td>" + bowling.frameDisplay(frame) + "</td><td>" + bowling.totalScore() + "</td></tr>")
   }
 
-  var frameEvents = function(frame) {
-    if(bowling.standardScore(frame) > 10) {
+  // game2
+
+  $("#submit2").click(function() {
+    var score = parseInt($("#throw-two").val());
+    var frame = bowling2.getCurrentFrame()
+    bowling2.throw(score);
+    if(bowling2.isFirstThrow() == true) {
+      addRow2(frame)
+    }
+    if(bowling2.gameOver == true) {
+      addRow2(frame)
+      gameOverEvent(bowling2)
+    }
+  })
+
+  var addRow2 = function(frame){
+    frameEvents(bowling2, frame)
+    $("#bowling-frames2").append("<tr><td>" + frame + "</td><td>" + bowling2.scores[frame][0] +  "</td><td>" + bowling2.scores[frame][1] + "</td><td>" + bowling2.frameDisplay(frame) + "</td><td>" + bowling2.totalScore() + "</td></tr>")
+  }
+
+  // shared events
+
+  var frameEvents = function(game,frame) {
+    if(game.standardScore(frame) > 10) {
       changeGif("cheater")
       changeMessage("Smokey, this is not Vietnam, this is bowling. There are rules.")
-    } else if(bowling.isStrike(frame)) {
+    } else if(game.isStrike(frame)) {
       changeGif("strike")
       changeMessage("STRIKE: I'm throwing rocks tonight. Mark it, Dude.")
-    } else if(bowling.isSpare(frame)) {
+    } else if(game.isSpare(frame)) {
       changeGif("spare")
       changeMessage("SPARE: Mark it, Dude.")
-    } else if(bowling.standardScore(frame) == 0) {
+    } else if(game.standardScore(frame) == 0) {
       changeGif("zero")
       changeMessage("Mark it zero. Next frame.")
     }
   }
 
-  var gameOverEvent = function() {
-    if(bowling.totalScore() == 300) {
+  var gameOverEvent = function(game) {
+    if(game.totalScore() == 300) {
       changeGif("perfect-game")
-      changeMessage("PERFECT GAME: Shut the fuck up, Donny")
-    } else if(bowling.totalScore() == 0) {
+      changeMessage("PERFECT GAME: He was a bowler")
+    } else if(game.totalScore() == 0) {
       changeGif("gutter-game")
       changeMessage("GUTTER GAME: Forget it Donny, you're out of your element!")
     } else {
       changeGif("game-over")
-      changeMessage("GAME OVER: you scored " + bowling.totalScore() + ", The Dude Abides")      
+      changeMessage("GAME OVER: you scored " + game.totalScore() + ", The Dude Abides")      
     }
   }
 

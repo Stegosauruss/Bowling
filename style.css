@@ -1,3 +1,19 @@
+.column {
+  float: left;
+  width: 33%;
+}
+
+.main {
+  float: left;
+  width: 40%;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
 body {
   float: center;
   letter-spacing: 2px;
@@ -26,16 +42,17 @@ input {
 }
 
 table {
-  margin-left: 25%;
-  font-size: 24px;
   font-family: 'Sancreek', cursive;
-  font-style: normal;
+  font-style: bold;
   font-weight: 400;
+  font-size: auto;
   color: yellow;
+  width: 80%;
+  margin: 10%;
 }
 
 img {
-  width: 40%
+  width: 90%
 }
 
 .get-ready {
