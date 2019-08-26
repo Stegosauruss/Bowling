@@ -37,9 +37,9 @@ Bowling.prototype = {
   },
 
   frameScore: function(frame) {
-    if(this._isStrike(frame)) {
+    if(this.isStrike(frame)) {
       return this.strikeScore(frame);
-    } else if(this._isSpare(frame)) {
+    } else if(this.isSpare(frame)) {
       return this.spareScore(frame);
     } else {
       return this.standardScore(frame);
@@ -55,16 +55,16 @@ Bowling.prototype = {
   },
 
   strikeScore: function(frame) {
-    if(this._isStrike(frame + 1)) {
+    if(this.isStrike(frame + 1)) {
       return 20 + this.scores[frame + 2][0]
     }
     return 10 + this.standardScore(frame + 1)
   },
 
   frameDisplay: function(frame) {
-    if(this._isStrike(frame)) {
+    if(this.isStrike(frame)) {
       return 'X'
-    }else if(this._isSpare(frame)) {
+    }else if(this.isSpare(frame)) {
       return '/'
     } else {
       return this.standardScore(frame);
@@ -72,18 +72,18 @@ Bowling.prototype = {
   },
 
   _nextFrame: function() {
-    if((this._isStrike(10) && this.getCurrentFrame() == 12) || (this._isSpare(10) && this.getCurrentFrame() == 11) || (this._isStandard(10) && (this.scores[10][1] !== false))) {
+    if((this.isStrike(10) && this.getCurrentFrame() == 12) || (this.isSpare(10) && this.getCurrentFrame() == 11) || (this._isStandard(10) && (this.scores[10][1] !== false))) {
       this.gameOver = true
       return
     }
     this._frame++
   },
 
-  _isStrike: function(frame) {
+  isStrike: function(frame) {
     if(this.scores[frame][0] == 10) { return true }
   },
 
-  _isSpare: function(frame) {
+  isSpare: function(frame) {
     if(this.standardScore(frame) == 10 && this.scores[frame][1] != 0) { return true }
   },
 
